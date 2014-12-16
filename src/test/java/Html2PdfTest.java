@@ -11,6 +11,22 @@ import static org.junit.Assert.fail;
 public class Html2PdfTest {
 
 
+    private String htmlPath(String htmlName){
+        String htmlDirPath = "src/test/html/";
+        return htmlDirPath + htmlName;
+    }
+
+    private void convertHTML(String htmlFilePath, String pdfFilePath) throws IOException, DocumentException {
+
+        InputStream inputStream = new FileInputStream(new File(htmlFilePath));
+        OutputStream outputStream = new FileOutputStream(new File(pdfFilePath));
+
+        Html2Pdf.convert(inputStream, outputStream);
+
+        inputStream.close();
+        outputStream.close();
+
+    }
 
 
 
@@ -21,7 +37,7 @@ public class Html2PdfTest {
         InputStream inputStream = new ByteArrayInputStream(k.getBytes());
 
         try {
-            OutputStream outputStream = new FileOutputStream(new File("target/Test.pdf"));
+            OutputStream outputStream = new FileOutputStream(new File("src/test/html/SimpleHTML.pdf"));
 
             Html2Pdf.convert(inputStream, outputStream);
 
@@ -44,8 +60,17 @@ public class Html2PdfTest {
 
         }
 
+    }
 
+    @Test
+    public void testConvertHTMLWithTitle() throws IOException, DocumentException {
 
+        convertHTML(htmlPath("TitleHTML.html"), htmlPath("TitleHTML.pdf"));
+    }
 
+    @Test
+    public void testConvertHTMLWithBulletPoints() throws IOException, DocumentException {
+
+        convertHTML(htmlPath("BulletPointsHTML.html"), htmlPath("BulletPointsHTML.pdf"));
     }
 }

@@ -16,20 +16,7 @@ public class Main {
 
     public static void main(String[] args){
 
-        Document document = new Document();
 
-        try{
-
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("/Users/Sherlock/Desktop/HelloWorld.pdf"));
-            document.open();
-            document.add(new Paragraph("A hello world PDF document."));
-            document.close();
-
-        }catch(DocumentException e){
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
 
     }
